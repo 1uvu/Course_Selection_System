@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ctbu.qx.mapper.StudentMapper">
+    <resultMap id="student" type="ctbu.qx.pojo.Student" >
+        <result property="studentId" column="studentId" />
+        <result property="studentName" column="studentName" />
+        <result property="studentAge" column="studentAge" />
+        <result property="studentMinCourseScore" column="studentMinCourseScore" />
+        <result property="studentCurrCourseScore" column="studentCurrCourseScore" />
+        <result property="studentMaxCourseScore" column="studentMaxCourseScore" />
+        <result property="studentNeedPubCourse" column="studentNeedPubCourse" />
+        <result property="studentNeedReqCourse" column="studentNeedReqCourse" />
+        <result property="studentNeedSelCourse" column="studentNeedSelCourse" />
+    </resultMap>
+
+
+    <select id="selectStudent" parameterType="int" resultType="ctbu.qx.pojo.Student">
+        SELECT * FROM student WHERE student.StudentId = #{studentId}
+    </select>
+
+    <insert id="insertStudent">
+        INSERT INTO student (
+            StudentId, StudentName, StudentAge,
+            StudentMinCourseScore, StudentCurrCourseScore,
+            StudentMaxCourseScore,
+            StudentNeedPubCourse,
+            StudentNeedReqCourse,
+            StudentNeedSelCourse
+        ) VALUES (
+                     #{studentId}, #{studentName}, #{studentAge},
+                     #{studentMinCourseScore}, #{studentCurrCourseScore},
+                     #{studentMaxCourseScore},
+                     #{studentNeedPubCourse},
+                     #{studentNeedReqCourse},
+                     #{studentNeedSelCourse}
+                 )
+    </insert>
+
+    <update id="updateStudent" parameterType="ctbu.qx.pojo.Student">
+        UPDATE student SET
+                          StudentName=#{studentName}, StudentAge=#{studentAge},
+                          StudentMinCourseScore=#{studentMinCourseScore}, StudentCurrCourseScore=#{studentCurrCourseScore},
+                          StudentMaxCourseScore=#{studentMaxCourseScore}, StudentNeedPubCourse=#{studentNeedPubCourse},
+                          StudentNeedReqCourse=#{studentNeedReqCourse},
+                          StudentNeedSelCourse=#{studentNeedSelCourse}
+        WHERE StudentId=#{studentId}
+    </update>
+
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student WHERE StudentId=#{studentId}
+    </delete>
+
+</mapper>

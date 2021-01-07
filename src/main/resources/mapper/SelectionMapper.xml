@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ctbu.qx.mapper.SelectionMapper">
+    <resultMap id="selection" type="ctbu.qx.pojo.Selection" >
+        <result property="courseId" column="courseId" />
+        <result property="studentId" column="studentId" />
+        <result property="selectDateTime" column="selectDateTime" />
+    </resultMap>
+
+
+    <select id="selectSelection" resultType="ctbu.qx.pojo.Selection">
+        SELECT * FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
+    </select>
+
+    <insert id="insertSelection">
+        INSERT INTO selection (
+            CourseId, StudentId, SelectDateTime
+        ) VALUES (
+                     #{courseId}, #{studentId}, #{selectDateTime}
+                 )
+    </insert>
+
+    <delete id="deleteSelection">
+        DELETE FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
+    </delete>
+
+</mapper>

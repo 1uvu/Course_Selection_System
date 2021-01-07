@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ctbu.qx.mapper.CourseMapper">
+    <resultMap id="course" type="ctbu.qx.pojo.Course" >
+        <result property="courseId" column="courseId" />
+        <result property="courseName" column="courseName" />
+        <result property="courseKind" column="courseKind" />
+        <result property="courseHour" column="courseHour" />
+        <result property="classHour" column="classHour" />
+        <result property="testHour" column="testHour" />
+        <result property="courseCurrStudentNumber" column="courseCurrStudentNumber" />
+        <result property="courseMaxStudentNumber" column="courseMaxStudentNumber" />
+        <result property="courseScore" column="courseScore" />
+        <result property="coursePeriod" column="coursePeriod" />
+    </resultMap>
+
+
+    <select id="selectCourse" parameterType="int" resultType="ctbu.qx.pojo.Course">
+        SELECT * FROM course WHERE course.courseId = #{courseId}
+    </select>
+
+    <insert id="insertCourse">
+        INSERT INTO course (
+            courseId, courseName, courseKind,
+            courseHour, classHour, testHour,
+            courseCurrStudentNumber,
+            courseMaxStudentNumber,
+            courseScore, coursePeriod
+        ) VALUES (
+                     #{courseId}, #{courseName}, #{courseKind},
+                     #{courseHour}, #{classHour}, #{testHour},
+                     #{courseCurrStudentNumber},
+                     #{courseMaxStudentNumber},
+                     #{courseScore}, #{coursePeriod}
+                 )
+    </insert>
+
+    <update id="updateCourse" parameterType="ctbu.qx.pojo.Course">
+        UPDATE course SET
+                          courseName=#{courseName}, courseKind=#{courseKind},
+                          courseHour=#{courseHour}, classHour=#{classHour},
+                          testHour=#{testHour}, courseCurrStudentNumber=#{courseCurrStudentNumber},
+                          courseMaxStudentNumber=#{courseMaxStudentNumber},
+                          courseScore=#{courseScore}, coursePeriod=#{courseScore}
+        WHERE courseId=#{courseID}
+    </update>
+
+    <delete id="deleteCourse" parameterType="int">
+        DELETE FROM course WHERE courseId=#{courseId}
+    </delete>
+
+</mapper>
