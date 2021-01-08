@@ -1,8 +1,11 @@
 package ctbu.qx.mapper;
 
+import ctbu.qx.mapper.StudentMapper;
 import ctbu.qx.pojo.Student;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import java.util.List;
 
 public class StudentMapperImpl extends SqlSessionDaoSupport implements StudentMapper {
 
@@ -10,7 +13,18 @@ public class StudentMapperImpl extends SqlSessionDaoSupport implements StudentMa
         SqlSession sqlSession = getSqlSession();
 
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-        return mapper.selectStudent(studentId);
+        try {
+            return mapper.selectStudent(studentId);
+        } catch (Exception e) {
+            return new Student(-1, "", 0, 0, 0, 0, 0, 0, 0);
+        }
+    }
+
+    public List<Student> selectAllStudent() {
+        SqlSession sqlSession = getSqlSession();
+
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+        return mapper.selectAllStudent();
     }
 
     public void insertStudent(Student student) {
@@ -33,4 +47,5 @@ public class StudentMapperImpl extends SqlSessionDaoSupport implements StudentMa
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
         mapper.updateStudent(student);
     }
+
 }

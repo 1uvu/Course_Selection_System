@@ -20,6 +20,10 @@
         SELECT * FROM student WHERE student.StudentId = #{studentId}
     </select>
 
+    <select id="selectAllStudent" resultMap="student">
+        SELECT * FROM student
+    </select>
+
     <insert id="insertStudent">
         INSERT INTO student (
             StudentId, StudentName, StudentAge,

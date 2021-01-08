@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.util.Date;
 
 public class Test {
     public void test() throws IOException {
@@ -33,6 +32,7 @@ public class Test {
         System.out.println(course.toString());
         System.out.println(student.toString());
         System.out.println(selection.toString());
+        System.out.println(courseMapper.selectAllCourseByKind("公共课"));
     }
 
     public static void main(String[] args) throws IOException {

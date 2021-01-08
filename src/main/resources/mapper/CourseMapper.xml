@@ -21,6 +21,15 @@
         SELECT * FROM course WHERE course.courseId = #{courseId}
     </select>
 
+    <select id="selectAllCourse" resultMap="course">
+        SELECT * FROM course
+    </select>
+
+
+    <select id="selectAllCourseByKind" parameterType="String" resultMap="course">
+        SELECT * FROM course WHERE course.courseKind = #{courseKind}
+    </select>
+
     <insert id="insertCourse">
         INSERT INTO course (
             courseId, courseName, courseKind,
@@ -44,7 +53,7 @@
                           testHour=#{testHour}, courseCurrStudentNumber=#{courseCurrStudentNumber},
                           courseMaxStudentNumber=#{courseMaxStudentNumber},
                           courseScore=#{courseScore}, coursePeriod=#{courseScore}
-        WHERE courseId=#{courseID}
+        WHERE courseId=#{courseId}
     </update>
 
     <delete id="deleteCourse" parameterType="int">

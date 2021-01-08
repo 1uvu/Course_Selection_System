@@ -14,6 +14,14 @@
         SELECT * FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
     </select>
 
+    <select id="selectSelectionByStudentId" parameterType="int" resultMap="selection">
+        SELECT * FROM selection WHERE selection.StudentId=#{studentId}
+    </select>
+
+    <select id="selectSelectionByCourseId" parameterType="int" resultMap="selection">
+        SELECT * FROM selection WHERE selection.CourseId=#{courseId}
+    </select>
+
     <insert id="insertSelection">
         INSERT INTO selection (
             CourseId, StudentId, SelectDateTime
@@ -26,4 +34,11 @@
         DELETE FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
     </delete>
 
+    <select id="deleteSelectionByStudentId" parameterType="int" >
+        DELETE FROM selection WHERE selection.StudentId=#{studentId}
+    </select>
+
+    <select id="deleteSelectionByCourseId" parameterType="int">
+        DELETE FROM selection WHERE selection.CourseId=#{courseId}
+    </select>
 </mapper>
