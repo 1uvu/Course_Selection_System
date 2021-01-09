@@ -28,6 +28,7 @@ public class CourseEditView extends View {
     private JPanel courseEditPanel;
 
     private final AdminClientView view;
+    private Course course;
 
     private final ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
     private final CourseMapperImpl courseMapper = (CourseMapperImpl) context.getBean("courseMapper");
@@ -97,6 +98,7 @@ public class CourseEditView extends View {
                 coursePeriodTextField.getText()
         );
 
+        course.setCourseCurrStudentNumber(this.course.getCourseCurrStudentNumber());
         if (view.isCourseUpdate())
             courseCtrl.updateCourse(course);
         else
@@ -116,5 +118,6 @@ public class CourseEditView extends View {
         courseScoreTextField.setText(String.valueOf(course.getCourseScore()));
         coursePeriodTextField.setText(String.valueOf(course.getCoursePeriod()));
 
+        this.course = course;
     }
 }

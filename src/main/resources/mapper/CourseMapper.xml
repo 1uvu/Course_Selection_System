@@ -52,7 +52,7 @@
                           courseHour=#{courseHour}, classHour=#{classHour},
                           testHour=#{testHour}, courseCurrStudentNumber=#{courseCurrStudentNumber},
                           courseMaxStudentNumber=#{courseMaxStudentNumber},
-                          courseScore=#{courseScore}, coursePeriod=#{courseScore}
+                          courseScore=#{courseScore}, coursePeriod=#{coursePeriod}
         WHERE courseId=#{courseId}
     </update>
 
