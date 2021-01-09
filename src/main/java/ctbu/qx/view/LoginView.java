@@ -2,7 +2,8 @@ package ctbu.qx.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginView extends View{
     private final static JFrame frame = new JFrame("LoginView");
@@ -18,19 +19,12 @@ public class LoginView extends View{
         initialize();
     }
 
-    public static void main(String[] args) {
-        LoginView view = new LoginView();
-        view.launch();
-    }
-
-
     private void initialize() {
 
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("exit button clicked");
                 System.exit(-1);
             }
         });
@@ -39,14 +33,13 @@ public class LoginView extends View{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("ok button clicked");
                 // 创建其他窗口
                 if (adminCheckBox.isSelected()) {
                     AdminClientView adminClientView = new AdminClientView();
                     adminClientView.launch();
                     exit();
-                } else if (studentCheckBox.isSelected() && studentIdTextField.getText() != null){
-                    StudentClientView studentClientView = new StudentClientView(Integer.parseInt(studentIdTextField.getText()));
+                } else if (studentCheckBox.isSelected() && !studentIdTextField.getText().equals("")){
+                    StudentClientView studentClientView = new StudentClientView(getThis());
                     studentClientView.launch();
                     exit();
                 }
@@ -57,7 +50,6 @@ public class LoginView extends View{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (adminCheckBox.isSelected()) {
-                    System.out.println("admin selected");
                     if (studentCheckBox.isSelected())
                         studentCheckBox.setSelected(false);
                 }
@@ -68,7 +60,6 @@ public class LoginView extends View{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (studentCheckBox.isSelected()) {
-                    System.out.println("student selected");
                     if (adminCheckBox.isSelected())
                         adminCheckBox.setSelected(false);
                 }
@@ -85,7 +76,7 @@ public class LoginView extends View{
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         int x = (int)(toolkit.getScreenSize().getWidth()-frame.getWidth())/2;
         int y = (int)(toolkit.getScreenSize().getHeight()-frame.getHeight())/2;
-        frame.setLocation(x, y);
+        frame.setLocation(x-200, y-100);
 
         frame.pack();
         frame.setVisible(true);
@@ -97,5 +88,11 @@ public class LoginView extends View{
         frame.dispose();
     }
 
+    public int getStudentId() {
+        return Integer.parseInt(studentIdTextField.getText());
+    }
 
+    public LoginView getThis() {
+        return this;
+    }
 }

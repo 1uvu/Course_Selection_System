@@ -12,4 +12,8 @@ public interface CourseMapper {
     void insertCourse(Course course);
     void deleteCourse(int courseId);
     void updateCourse(Course course);
+
+    // course trigger need be triggered before exec
+    void deleteTrigger(int courseId);
+    void updateTrigger(Course course);
 }

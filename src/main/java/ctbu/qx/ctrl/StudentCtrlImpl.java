@@ -1,8 +1,13 @@
 package ctbu.qx.ctrl;
 
+import ctbu.qx.mapper.CourseMapperImpl;
+import ctbu.qx.mapper.SelectionMapperImpl;
 import ctbu.qx.mapper.StudentMapperImpl;
 import ctbu.qx.pojo.Course;
+import ctbu.qx.pojo.Selection;
 import ctbu.qx.pojo.Student;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -71,12 +76,57 @@ public class StudentCtrlImpl implements StudentCtrl {
         StringBuilder rtn = new StringBuilder();
         // adv.1 学分评价
         if (student.getStudentCurrCourseScore() < student.getStudentMinCourseScore())
-            rtn.append("1. 学分建议：学分不足，还缺 ")
-                    .append(String.valueOf(student.getStudentMinCourseScore() - student.getStudentCurrCourseScore()))
+            rtn.append("1. 学分建议：当前学分").append(student.getStudentCurrCourseScore())
+                    .append("\n学分不足，还缺 ")
+                    .append(student.getStudentMinCourseScore() - student.getStudentCurrCourseScore())
                     .append(" 分")
                     .append("\n");
-        else rtn.append("1. 学分建议：学分充足").append("\n");
-        // todo adv.2 已选课程分布评价
+        else rtn.append("1. 学分建议：当前学分").append(student.getStudentCurrCourseScore())
+                .append("\n学分充足").append("\n");
+
+        if (student.getStudentCurrCourseScore() > student.getStudentMaxCourseScore())
+            rtn.append("但学分已超 ")
+                    .append(student.getStudentCurrCourseScore() - student.getStudentMaxCourseScore())
+                    .append(" 分。");
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
+        CourseMapperImpl courseMapper = (CourseMapperImpl) context.getBean("courseMapper");
+        SelectionMapperImpl selectionMapper = (SelectionMapperImpl) context.getBean("selectionMapper");
+
+        List<Selection> selectionList = selectionMapper.selectSelectionByStudentId(student.getStudentId());
+
+        int pubNum = 0;
+        int reqNum = 0;
+        int selNum = 0;
+        for (Selection selection: selectionList) {
+            Course course = courseMapper.selectCourse(selection.getCourseId());
+            switch (course.getCourseKind()) {
+                case "公共课":
+                    pubNum++;
+                    break;
+                case "必修课":
+                    reqNum++;
+                    break;
+                case "选修课":
+                    selNum++;
+                    break;
+            }
+        }
+
+        rtn.append("2. 选课建议：\n目前已选 ").append(pubNum)
+                .append(" 门公共课，").append(reqNum)
+                .append(" 门必修课,").append(selNum)
+                .append(" 门选修课。\n");
+
+        if (pubNum < student.getStudentNeedPubCourse())
+            rtn.append("还差 ").append(student.getStudentNeedPubCourse() - pubNum).append(" 门公共课。");
+        else rtn.append("公共课已选择足够。");
+        if (reqNum < student.getStudentNeedReqCourse())
+            rtn.append("还差 ").append(student.getStudentNeedReqCourse() - reqNum).append(" 门必修课。");
+        else rtn.append("必修课已选择足够。");
+        if (selNum < student.getStudentNeedSelCourse())
+            rtn.append("还差 ").append(student.getStudentNeedSelCourse() - selNum).append(" 门选修课。");
+        else rtn.append("选修课已选择足够。");
 
         return rtn.toString();
     }

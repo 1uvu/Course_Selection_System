@@ -1,7 +1,6 @@
 package ctbu.qx.pojo;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Course implements Serializable {
     private final int courseId;

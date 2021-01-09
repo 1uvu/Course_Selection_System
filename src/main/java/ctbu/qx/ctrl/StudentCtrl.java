@@ -1,6 +1,5 @@
 package ctbu.qx.ctrl;
 
-import ctbu.qx.pojo.Course;
 import ctbu.qx.pojo.Student;
 
 public interface StudentCtrl {

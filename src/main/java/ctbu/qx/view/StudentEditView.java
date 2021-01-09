@@ -1,10 +1,7 @@
 package ctbu.qx.view;
 
 import ctbu.qx.ctrl.StudentCtrlImpl;
-import ctbu.qx.mapper.CourseMapperImpl;
-import ctbu.qx.mapper.SelectionMapperImpl;
 import ctbu.qx.mapper.StudentMapperImpl;
-import ctbu.qx.pojo.Course;
 import ctbu.qx.pojo.Student;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,6 +25,8 @@ public class StudentEditView extends View{
     private JButton okButton;
     private JButton cancelButton;
     private JPanel studentEditPanel;
+
+    private Student student;
 
     private final AdminClientView view;
 
@@ -53,6 +52,7 @@ public class StudentEditView extends View{
                 super.mouseClicked(e);
                 genStudent();
                 view.initializeDataArea();
+                view.initializeInfoArea();
                 exit();
             }
         });
@@ -99,7 +99,12 @@ public class StudentEditView extends View{
                 Integer.parseInt(selCourseNumberTextField.getText())
         );
 
-        studentCtrl.addStudent(student);
+        student.setStudentCurrCourseScore(this.student.getStudentCurrCourseScore());
+        if (view.isStudentUpdate())
+            studentCtrl.updateStudent(student);
+        else
+            studentCtrl.addStudent(student);
+
     }
 
     public void parseStudent() {
@@ -114,12 +119,7 @@ public class StudentEditView extends View{
         reqCourseNumberTextField.setText(String.valueOf(student.getStudentNeedReqCourse()));
         selCourseNumberTextField.setText(String.valueOf(student.getStudentNeedSelCourse()));
 
-        studentCtrl.updateStudent(student);
-    }
-
-
-    public StudentMapperImpl getStudentMapper() {
-        return studentMapper;
+        this.student = student;
     }
 
 }

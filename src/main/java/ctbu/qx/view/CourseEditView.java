@@ -50,6 +50,7 @@ public class CourseEditView extends View {
                 super.mouseClicked(e);
                 genCourse();
                 view.initializeDataArea();
+                view.initializeInfoArea();
                 exit();
             }
         });
@@ -96,7 +97,10 @@ public class CourseEditView extends View {
                 coursePeriodTextField.getText()
         );
 
-        courseCtrl.addCourse(course);
+        if (view.isCourseUpdate())
+            courseCtrl.updateCourse(course);
+        else
+            courseCtrl.addCourse(course);
     }
 
     public void parseCourse() {
@@ -112,10 +116,5 @@ public class CourseEditView extends View {
         courseScoreTextField.setText(String.valueOf(course.getCourseScore()));
         coursePeriodTextField.setText(String.valueOf(course.getCoursePeriod()));
 
-        courseCtrl.updateCourse(course);
-    }
-
-    public CourseMapperImpl getCourseMapper() {
-        return courseMapper;
     }
 }

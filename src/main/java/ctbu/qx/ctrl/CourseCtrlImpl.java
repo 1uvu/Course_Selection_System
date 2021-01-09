@@ -2,7 +2,6 @@ package ctbu.qx.ctrl;
 
 import ctbu.qx.mapper.CourseMapperImpl;
 import ctbu.qx.pojo.Course;
-import ctbu.qx.pojo.Student;
 
 import java.util.List;
 

@@ -10,4 +10,6 @@ public interface StudentMapper {
     void insertStudent(Student student);
     void deleteStudent(int studentId);
     void updateStudent(Student student);
+
+    void deleteTrigger(int studentId);
 }

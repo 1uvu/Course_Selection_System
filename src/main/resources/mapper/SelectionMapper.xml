@@ -11,15 +11,15 @@
 
 
     <select id="selectSelection" resultType="ctbu.qx.pojo.Selection">
-        SELECT * FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
+        SELECT * FROM selection WHERE courseId=#{courseId} and studentId=#{studentId}
     </select>
 
     <select id="selectSelectionByStudentId" parameterType="int" resultMap="selection">
-        SELECT * FROM selection WHERE selection.StudentId=#{studentId}
+        SELECT * FROM selection WHERE studentId=#{studentId}
     </select>
 
     <select id="selectSelectionByCourseId" parameterType="int" resultMap="selection">
-        SELECT * FROM selection WHERE selection.CourseId=#{courseId}
+        SELECT * FROM selection WHERE courseId=#{courseId}
     </select>
 
     <insert id="insertSelection">
@@ -31,14 +31,14 @@
     </insert>
 
     <delete id="deleteSelection">
-        DELETE FROM selection WHERE selection.CourseId=#{courseId} and selection.StudentId=#{studentId}
+        DELETE FROM selection WHERE courseId=#{courseId} and studentId=#{studentId}
     </delete>
 
     <select id="deleteSelectionByStudentId" parameterType="int" >
-        DELETE FROM selection WHERE selection.StudentId=#{studentId}
+        DELETE FROM selection WHERE studentId=#{studentId}
     </select>
 
     <select id="deleteSelectionByCourseId" parameterType="int">
-        DELETE FROM selection WHERE selection.CourseId=#{courseId}
+        DELETE FROM selection WHERE courseId=#{courseId}
     </select>
 </mapper>
