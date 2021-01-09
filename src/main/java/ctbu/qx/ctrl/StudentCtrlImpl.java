@@ -21,7 +21,7 @@ public class StudentCtrlImpl implements StudentCtrl {
     @Override
     public boolean addStudent(Student student) {
         Student _student = studentMapper.selectStudent(student.getStudentId());
-        if (_student.getStudentId() == -1) return false;
+        if (_student.getStudentId() != -1) return false;
         else studentMapper.insertStudent(student);
         return true;
     }

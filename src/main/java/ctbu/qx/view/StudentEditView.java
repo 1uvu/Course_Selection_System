@@ -99,7 +99,9 @@ public class StudentEditView extends View{
                 Integer.parseInt(selCourseNumberTextField.getText())
         );
 
-        student.setStudentCurrCourseScore(this.student.getStudentCurrCourseScore());
+        if (this.student != null) student.setStudentCurrCourseScore(this.student.getStudentCurrCourseScore());
+
+        System.out.println(student);
         if (view.isStudentUpdate())
             studentCtrl.updateStudent(student);
         else

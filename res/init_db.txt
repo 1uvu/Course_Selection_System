@@ -1,6 +1,6 @@
-CREATE DATABASE `course_system`
+CREATE DATABASE `course_system`;
 
-use course_system
+use course_system;
 
 CREATE TABLE `course` (
 	`CourseID` INT(10) NOT NULL,

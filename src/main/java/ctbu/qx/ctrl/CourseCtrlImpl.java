@@ -15,7 +15,7 @@ public class CourseCtrlImpl implements CourseCtrl {
     @Override
     public boolean addCourse(Course course) {
         Course _course = courseMapper.selectCourse(course.getCourseId());
-        if (_course.getCourseId() == -1) return false;
+        if (_course.getCourseId() != -1) return false;
         else courseMapper.insertCourse(course);
         return true;
     }

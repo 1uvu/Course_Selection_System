@@ -98,7 +98,7 @@ public class CourseEditView extends View {
                 coursePeriodTextField.getText()
         );
 
-        course.setCourseCurrStudentNumber(this.course.getCourseCurrStudentNumber());
+        if (this.course != null) course.setCourseCurrStudentNumber(this.course.getCourseCurrStudentNumber());
         if (view.isCourseUpdate())
             courseCtrl.updateCourse(course);
         else
