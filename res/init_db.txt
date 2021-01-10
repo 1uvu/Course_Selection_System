@@ -58,7 +58,7 @@ ENGINE=InnoDB
 ;
 
 
-INSERT INTO `student` VALUES ('1', '邱鑫', '10', '60', '0', '70', '3', '3', '2');
+INSERT INTO `student` VALUES ('1', '丁震', '10', '60', '0', '70', '3', '3', '2');
 INSERT INTO `student` VALUES ('2', '码云', '50', '60', '0', '70', '3', '3', '2');
 INSERT INTO `student` VALUES ('3', '麻花滕', '40', '60', '0', '70', '3', '3', '2');
 INSERT INTO `student` VALUES ('4', '章佚名', '30', '60', '0', '70', '3', '3', '2');
